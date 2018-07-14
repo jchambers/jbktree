@@ -1,5 +1,7 @@
 # jbktree
 
+[![Build Status](https://travis-ci.org/jchambers/jbktree.svg?branch=master)](https://travis-ci.org/jchambers/jbktree)
+
 jbktree provides a [generic](https://docs.oracle.com/javase/tutorial/java/generics/) [BK-tree](https://signal-to-noise.xyz/post/bk-tree/) implemented as a [`java.util.Collection`](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html). A BK-tree is a kind of [metric tree](https://en.wikipedia.org/wiki/Metric_tree) designed for use in discrete [metric spaces](https://en.wikipedia.org/wiki/Metric_space). BK-trees are generally used to efficiently conduct [_k_-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) searches.
 
 A common use case for BK-trees (but certainly not the only use case) is "fuzzy matching" for strings, or "spell-checking." In this use case, we add a list of known words into a BK-tree, and can then search the tree for words that are within a certain [edit distance](https://en.wikipedia.org/wiki/Edit_distance) of a query term. To demonstrate this use case, we can start by loading a list of words into a `List`.
