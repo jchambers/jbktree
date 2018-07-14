@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -49,5 +50,20 @@ public class BKTreeNodeTest {
 
         assertEquals(expectedElements.size(), node.addElementsToArray(array, 0));
         assertEquals(expectedElements, new HashSet<>(Arrays.asList(array)));
+    }
+
+    @Test
+    public void getNearestNeighbors() {
+        final BKTreeNode<Integer> node = new BKTreeNode<>(1);
+        node.add(2, DIFFERENCE_DISTANCE_FUNCTION);
+        node.add(3, DIFFERENCE_DISTANCE_FUNCTION);
+        node.add(17, DIFFERENCE_DISTANCE_FUNCTION);
+
+        final PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
+        node.getNearestNeighbors(2, 1, priorityQueue, DIFFERENCE_DISTANCE_FUNCTION);
+
+        assertEquals(3, priorityQueue.size());
+        assertTrue(priorityQueue.containsAll(Arrays.asList(1, 2, 3)));
     }
 }

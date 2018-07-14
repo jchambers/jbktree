@@ -155,4 +155,14 @@ public class BKTreeTest {
         tree.clear();
         assertTrue(tree.isEmpty());
     }
+
+    @Test
+    public void testGetNearestNeighbors() {
+        final BKTree<Integer> tree = new BKTree<>(DIFFERENCE_DISTANCE_FUNCTION, Arrays.asList(1, 3, 5, 7, 9, 11, 13));
+        final PriorityQueue<Integer> nearestNeighbors = tree.getNearestNeighbors(5, 2);
+
+        assertEquals(3, nearestNeighbors.size());
+        assertEquals(5, (int) nearestNeighbors.peek());
+        assertTrue(nearestNeighbors.containsAll(Arrays.asList(3, 5, 7)));
+    }
 }

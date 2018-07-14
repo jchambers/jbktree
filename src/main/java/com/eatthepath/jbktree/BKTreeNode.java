@@ -1,6 +1,7 @@
 package com.eatthepath.jbktree;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 class BKTreeNode<E> {
 
@@ -65,5 +66,24 @@ class BKTreeNode<E> {
         }
 
         return offset - originalOffset;
+    }
+
+    void getNearestNeighbors(final E query, final int radius, final PriorityQueue<E> results, final DiscreteDistanceFunction<? super E> distanceFunction) {
+        final int distance = distanceFunction.getDistance(query, value);
+
+        if (distance <= radius) {
+            results.add(value);
+        }
+
+        final int left = Math.max(0, distance - radius);
+        final int right = Math.min(childNodes.length - 1, distance + radius);
+
+        for (int i = left; i <= right; i++) {
+            final BKTreeNode<E> childNode = childNodes[i];
+
+            if (childNode != null) {
+                childNode.getNearestNeighbors(query, radius, results, distanceFunction);
+            }
+        }
     }
 }

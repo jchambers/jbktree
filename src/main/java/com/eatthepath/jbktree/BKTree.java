@@ -1,6 +1,7 @@
 package com.eatthepath.jbktree;
 
 import java.util.*;
+import java.util.function.ToIntFunction;
 
 public class BKTree<E> extends AbstractSet<E> {
     private BKTreeNode<E> rootNode;
@@ -127,5 +128,16 @@ public class BKTree<E> extends AbstractSet<E> {
     @Override
     public void clear() {
         rootNode = null;
+    }
+
+    public PriorityQueue<E> getNearestNeighbors(final E query, final int radius) {
+        final PriorityQueue<E> results =
+                new PriorityQueue<>(Comparator.comparingInt(value -> distanceFunction.getDistance(value, query)));
+
+        if (rootNode != null) {
+            rootNode.getNearestNeighbors(query, radius, results, distanceFunction);
+        }
+
+        return results;
     }
 }
