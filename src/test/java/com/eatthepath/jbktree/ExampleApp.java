@@ -4,6 +4,7 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -33,12 +34,5 @@ public class ExampleApp {
             final String word = results.poll();
             System.out.format("| %-8s | %-8d |\n", word, distanceFunction.getDistance("exaple", word));
         }
-
-        final PriorityQueue<String> moreDifferentResults =
-                new PriorityQueue<>(Comparator.comparingInt(value -> distanceFunction.getDistance(value, "exaple")));
-
-        words.stream()
-                .filter(word -> distanceFunction.getDistance(word, "exaple") < 2)
-                .forEach(moreDifferentResults::add);
     }
 }
