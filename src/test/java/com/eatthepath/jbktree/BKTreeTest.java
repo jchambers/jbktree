@@ -208,7 +208,7 @@ public class BKTreeTest {
 
     @Test(expected = NullPointerException.class)
     public void testToTypedArrayNullArray() {
-        new BKTree<>(DIFFERENCE_DISTANCE_FUNCTION).toArray(null);
+        new BKTree<>(DIFFERENCE_DISTANCE_FUNCTION).toArray((Object[]) null);
     }
 
     @Test(expected = ArrayStoreException.class)
